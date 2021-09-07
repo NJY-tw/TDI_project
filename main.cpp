@@ -5,6 +5,7 @@
     #include <wx/wx.h>
 #endif
 #include <wx/window.h>
+#include <wx/button.h>
 #include <base.h>
 
 class MyApp: public wxApp
