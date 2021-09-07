@@ -2,5 +2,5 @@
 
 class SD_button : public wxButton
 {
-    
-}
+
+};

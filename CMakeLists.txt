@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(SRC_FILES
     main.cpp
     SD_var_process.cpp
+    SD_button.cpp
     )
 
 include_directories(

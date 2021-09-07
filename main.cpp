@@ -22,11 +22,13 @@ private:
     void OnHello(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
+    void OnButton(wxCommandEvent& event);
     wxDECLARE_EVENT_TABLE();
 };
 enum
 {
-    ID_Hello = 1
+    ID_Hello = 1,
+    ID_Button = 2
 };
 
 //bind the ID number with the behavior
@@ -34,6 +36,7 @@ wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
     EVT_MENU(ID_Hello,   MyFrame::OnHello)
     EVT_MENU(wxID_EXIT,  MyFrame::OnExit)
     EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
+    EVT_BUTTON(ID_Button, MyFrame::OnButton)
 wxEND_EVENT_TABLE()
 wxIMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
@@ -60,8 +63,11 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     SetMenuBar( menuBar );
     CreateStatusBar();
     SetStatusText( "Welcome to wxWidgets!" );
-    wxPanel * panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(300, 300));
-    panel->SetBackgroundColour(SD_Orange);
+
+    // wxPanel * panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(300, 300));
+    // panel->SetBackgroundColour(SD_Orange);
+
+    wxButton* testButton = new wxButton(this,wxID_ANY,"fuck");
 
 
     //
@@ -78,4 +84,9 @@ void MyFrame::OnAbout(wxCommandEvent& event)
 void MyFrame::OnHello(wxCommandEvent& event)
 {
     wxLogMessage("Hello world from wxWidgets!");
+}
+
+void MyFrame::OnButton(wxCommandEvent& event)
+{
+   
 }
