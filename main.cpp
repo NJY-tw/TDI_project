@@ -5,6 +5,7 @@
     #include <wx/wx.h>
 #endif
 #include <wx/window.h>
+#include <wx/bitmap.h>
 #include <wx/button.h>
 #include <base.h>
 
@@ -41,8 +42,10 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
 {
-    MyFrame *frame = new MyFrame( "Hello World", wxPoint(50, 50), wxSize(450, 340) );
+    MyFrame *frame = new MyFrame( "Hello World", wxPoint(50, 50), wxSize(650, 440) );
     frame->Show( true );
+    // wxInitAllImageHandlers();
+
     return true;
 }
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
@@ -64,10 +67,22 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     CreateStatusBar();
     SetStatusText( "Welcome to wxWidgets!" );
 
-    // wxPanel * panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(300, 300));
-    // panel->SetBackgroundColour(SD_Orange);
+    // wxPanel * panelBack = new wxPanel(this, wxID_ANY, wxDefaultPosition);
+    // panelBack->SetBackgroundColour(SD_Orange);
 
-    wxButton* testButton = new wxButton(this,wxID_ANY,"fuck");
+    wxPanel * panel = new wxPanel(this, wxID_ANY, wxDefaultPosition);
+    
+
+    wxInitAllImageHandlers();
+
+    wxImage testImage(wxT("C:/workspace/project0/pic/button.png"), wxBITMAP_TYPE_PNG);
+    testImage.Rescale(100,100);
+    wxBitmap testBitmap(testImage);
+    //wxBitmap* testBitmap = new wxBitmap("C:/workspace/project0/pic/button.png",wxBITMAP_TYPE_PNG_RESOURCE );
+    wxButton* testButton = new wxButton(panel,ID_Button,wxEmptyString,wxDefaultPosition,wxSize(100, 100));
+    // testButton->SetSize(3,3);
+    testButton->SetBitmap(testBitmap);
+    
 
 
     //

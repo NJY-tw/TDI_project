@@ -1,3 +1,6 @@
 check the event and create image button first
 https://developpaper.com/wxwidgets-custom-button-method/
 https://docs.wxwidgets.org/3.0/classwx_button.html
+
+button should cling on a panel
+https://forums.wxwidgets.org/viewtopic.php?t=39157
