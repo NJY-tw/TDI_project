@@ -1,4 +1,9 @@
 //define all needed self defined include file and configuration here
-#include "SD_colour.h"
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
+
+
 
 

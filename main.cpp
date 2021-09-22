@@ -1,13 +1,16 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-    #include <wx/wx.h>
-#endif
+#include <base.h>
+
 #include <wx/window.h>
 #include <wx/bitmap.h>
 #include <wx/button.h>
-#include <base.h>
+
+/*self define header*/
+#include <SD_button.h>
+#include <SD_colour.h>
+
+//#include <wx/wxShapedWindow.h>
 
 class MyApp: public wxApp
 {
@@ -52,7 +55,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
         : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
 
-    //link the ID to the actual position
+    //[default frame]
     wxMenu *menuFile = new wxMenu;
     menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
                      "Help string shown in status bar for this menu item");
@@ -67,21 +70,28 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     CreateStatusBar();
     SetStatusText( "Welcome to wxWidgets!" );
 
-    // wxPanel * panelBack = new wxPanel(this, wxID_ANY, wxDefaultPosition);
-    // panelBack->SetBackgroundColour(SD_Orange);
+    //[set the background]
+    wxPanel * panelBack = new wxPanel(this, wxID_ANY, wxDefaultPosition);
+    panelBack->SetBackgroundColour(SD_Orange);
 
-    wxPanel * panel = new wxPanel(this, wxID_ANY, wxDefaultPosition);
-    
-
+    //[button trial]
+    wxPanel * panel = new wxPanel(panelBack, wxID_ANY, wxDefaultPosition,wxSize(300,300));
+    panel->SetBackgroundColour(SD_Orange);
     wxInitAllImageHandlers();
 
     wxImage testImage(wxT("C:/workspace/project0/pic/button.png"), wxBITMAP_TYPE_PNG);
-    testImage.Rescale(100,100);
+    wxImage testImage1(wxT("C:/workspace/project0/pic/button.png"), wxBITMAP_TYPE_PNG);
+    testImage.Rescale(50,50);
+    testImage1.Rescale(45,45);
+
     wxBitmap testBitmap(testImage);
-    //wxBitmap* testBitmap = new wxBitmap("C:/workspace/project0/pic/button.png",wxBITMAP_TYPE_PNG_RESOURCE );
-    wxButton* testButton = new wxButton(panel,ID_Button,wxEmptyString,wxDefaultPosition,wxSize(100, 100));
-    // testButton->SetSize(3,3);
-    testButton->SetBitmap(testBitmap);
+    wxBitmap testBitmap1(testImage1);
+
+    wxBitmappedButton* testButton = new wxBitmappedButton(panel,ID_Button,testBitmap,testBitmap1,wxPoint(100,100));
+    testButton->SetBackgroundColour(SD_Orange);
+    
+    
+    //testButton->SetBitmap(testBitmap);
     
 
 
