@@ -4,3 +4,9 @@ https://docs.wxwidgets.org/3.0/classwx_button.html
 
 button should cling on a panel
 https://forums.wxwidgets.org/viewtopic.php?t=39157
+
+excel wxAutoExcel
+https://github.com/pbfordev/wxAutoExcel
+
+find_package () :
+https://seanzhengw.github.io/blog/cmake/2018/04/23/cmake-find-package.html
