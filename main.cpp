@@ -45,7 +45,7 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
 {
-    MyFrame *frame = new MyFrame( "Hello World", wxPoint(50, 50), wxSize(650, 440) );
+    MyFrame *frame = new MyFrame( "TDI", wxPoint(50, 50), wxSize(650, 440) );
     frame->Show( true );
     // wxInitAllImageHandlers();
 
@@ -57,7 +57,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
     //[default frame]
     wxMenu *menuFile = new wxMenu;
-    menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
+    menuFile->Append(ID_Hello, "&Author\tCtrl-H",
                      "Help string shown in status bar for this menu item");
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);
@@ -68,7 +68,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     menuBar->Append( menuHelp, "&Help" );
     SetMenuBar( menuBar );
     CreateStatusBar();
-    SetStatusText( "Welcome to wxWidgets!" );
+    SetStatusText( "TDI sorts your To Do Items !" );
 
     //[set the background]
     wxPanel * panelBack = new wxPanel(this, wxID_ANY, wxDefaultPosition);
@@ -79,8 +79,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     panel->SetBackgroundColour(SD_Orange);
     wxInitAllImageHandlers();
 
-    wxImage testImage(wxT("C:/workspace/project0/pic/button.png"), wxBITMAP_TYPE_PNG);
-    wxImage testImage1(wxT("C:/workspace/project0/pic/button.png"), wxBITMAP_TYPE_PNG);
+    wxImage testImage(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
+    wxImage testImage1(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
     testImage.Rescale(50,50);
     testImage1.Rescale(45,45);
 
@@ -108,7 +108,7 @@ void MyFrame::OnAbout(wxCommandEvent& event)
 }
 void MyFrame::OnHello(wxCommandEvent& event)
 {
-    wxLogMessage("Hello world from wxWidgets!");
+    wxLogMessage("A little help from Alexander");
 }
 
 void MyFrame::OnButton(wxCommandEvent& event)
