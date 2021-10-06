@@ -10,3 +10,9 @@ https://github.com/pbfordev/wxAutoExcel
 
 find_package () :
 https://seanzhengw.github.io/blog/cmake/2018/04/23/cmake-find-package.html
+
+reasons that when set the background color the transparency of the png would work but not when background is a bitmap
+https://forums.wxwidgets.org/viewtopic.php?t=5096
+
+How about set the panel or button shape ??
+If no use then draw the bitmap with background needed seems to be the final solution

@@ -8,6 +8,7 @@ set(SRC_FILES
     main.cpp
     SD_var_process.cpp
     SD_button.cpp
+    SD_panel.cpp
     )
 
 include_directories(

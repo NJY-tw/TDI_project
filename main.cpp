@@ -9,6 +9,7 @@
 /*self define header*/
 #include <SD_button.h>
 #include <SD_colour.h>
+#include <SD_panel.h>
 
 //#include <wx/wxShapedWindow.h>
 
@@ -17,25 +18,30 @@ class MyApp: public wxApp
 public:
     virtual bool OnInit();
 };
+
 class MyFrame: public wxFrame
 {
 public:
     MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
-    wxBitmap BackGround;
+    
+
 private:
     //Set the event corresponding behavior
+    wxBitmap SD_Background;
+
     void OnHello(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnButton(wxCommandEvent& event);
-    void OnPaint(wxPaintEvent & event);
+    
     wxDECLARE_EVENT_TABLE();
 };
 enum
 {
     ID_Hello = 1,
     ID_Button = 2,
-    ID_Background = 3
+    ID_BasicPanel = 3
+
 };
 
 //bind the ID number with the behavior
@@ -50,13 +56,13 @@ wxIMPLEMENT_APP(MyApp);
 
 bool MyApp::OnInit()
 {
+    //[init image handlers]
     wxInitAllImageHandlers();
-    wxImage testImageBack(wxT("C:/workspace/project0/pic/wood_base.jpg"), wxBITMAP_TYPE_JPEG);
-
-    MyFrame *frame = new MyFrame( "TDI", wxPoint(50, 50), wxSize(650, 440) );
+    //[load background]
+    
+    MyFrame *frame = new MyFrame( "TDI", wxPoint(50, 50), wxSize(650, 440));
     frame->Show( true );
-    // wxInitAllImageHandlers();
-
+    
     return true;
 }
 
@@ -78,20 +84,44 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     SetMenuBar( menuBar );
     CreateStatusBar();
     SetStatusText( "TDI sorts your To Do Items !" );
-
-    //[init image handlers]
-    wxInitAllImageHandlers();
-
-    //[load images]
-    wxImage testImageBack(wxT("C:/workspace/project0/pic/wood_base.jpg"), wxBITMAP_TYPE_JPEG);
-    wxImage testImage(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
-    wxImage testImage1(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
     
-
-    //[set the background]
-    // wxPanel * panelBack = new wxPanel(this, ID_Background, wxDefaultPosition);
-    // panelBack->SetBackgroundColour(SD_Orange);
     
+    //[create button]
+
+
+    // wxPanel * panel = new wxPanel(this, ID_BasicPanel, wxPoint(100,100),wxSize(50,50));
+    // panel->SetBackgroundColour(SD_Black);
+
+    // wxPanel * panel1 = new wxPanel(panel, ID_BasicPanel, wxPoint(100,100),wxSize(50,50));
+
+    wxImage BG1(wxT("C:/workspace/project0/pic/wood_base.jpg"), wxBITMAP_TYPE_JPEG);
+    wxBitmap BG(BG1);
+    wxBitmapBGPanel* panel = new wxBitmapBGPanel(this,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+
+    wxBitmapBGPanel* panel1 = new wxBitmapBGPanel(panel,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+    
+    //wxTransparentPanel * panel1 = new wxTransparentPanel(panel, ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"456");
+    
+    
+    
+    // panel->SetBackgroundColour(SD_Orange);
+    
+    // wxImage BG1(wxT("C:/workspace/project0/pic/wood_base.jpg"), wxBITMAP_TYPE_JPEG);
+    // wxBitmap BG(BG1);
+    // wxBitmapBGPanel* panel = new wxBitmapBGPanel(this,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+    // wxPanel * panel1 = new wxPanel(panel, wxID_ANY, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"456");
+    // panel1->SetBackgroundColour(wxTRANSPARENT);
+
+    wxImage ImageBall1(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
+    wxImage ImageBall1_p(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
+    ImageBall1.Rescale(50,50);
+    ImageBall1_p.Rescale(45,45);
+    wxBitmap ball1(ImageBall1);
+    wxBitmap ball1_p(ImageBall1_p);
+    wxBitmappedButton* SD_Button_b1 = new wxBitmappedButton(panel1,ID_Button,ball1,ball1_p,wxPoint(0,0));
+    //SD_Button_b1->SetBackgroundColour(wxTRANSPARENT);
+    //SD_Button_b1->SetBackgroundStyle(wxBG_STYLE_TRANSPARENT);
+    //SD_Button_b1->SetSize(50,50);
     
     
     //[button trial]
@@ -111,11 +141,10 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     
     
     //testButton->SetBitmap(testBitmap);
-    
 
-
-    //
 }
+
+//action taken
 void MyFrame::OnExit(wxCommandEvent& event)
 {
     Close( true );
@@ -128,11 +157,6 @@ void MyFrame::OnAbout(wxCommandEvent& event)
 void MyFrame::OnHello(wxCommandEvent& event)
 {
     wxLogMessage("A little help from Alexander");
-}
-void MyFrame::OnPaint(wxPaintEvent & event)
-{
-    wxPaintDC dc(this);
-    dc.DrawBitmap(testImageBack,0,0);
 }
 
 void MyFrame::OnButton(wxCommandEvent& event)

@@ -24,7 +24,9 @@ wxBitmappedButton::wxBitmappedButton(wxWindow * parent, wxWindowID id,
 	SetSize(m_Normal.GetWidth(), m_Normal.GetHeight());
 	pos_x = pos.x;
 	pos_y = pos.y;
-	//::SetShape(this, wxRegion(m_Normal));	
+	
+	// SetBackgroundStyle(wxBG_STYLE_TRANSPARENT);
+	// Create(parent, id, wxEmptyString, pos);
 }
 
 void wxBitmappedButton::OnMouseDown(wxMouseEvent & event)
@@ -47,5 +49,6 @@ void wxBitmappedButton::OnDoubleClick(wxMouseEvent & event)
 void wxBitmappedButton::OnPaint(wxPaintEvent & event)
 {
 	wxPaintDC dc(this);
-	m_IsPushed ? dc.DrawBitmap(m_Pushed,(nor_width-push_width)/2,(nor_height-push_height)/2,true):dc.DrawBitmap(m_Normal,0,0,true);
+	//m_IsPushed ? dc.DrawBitmap(m_Pushed,(nor_width-push_width)/2,(nor_height-push_height)/2,true):dc.DrawBitmap(m_Normal,0,0,true);
+	m_IsPushed ? dc.DrawBitmap(m_Pushed,pos_x,pos_y,false):dc.DrawBitmap(m_Normal,pos_x,pos_y,false);
 }
