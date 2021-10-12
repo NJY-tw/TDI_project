@@ -60,7 +60,7 @@ bool MyApp::OnInit()
     wxInitAllImageHandlers();
     //[load background]
     
-    MyFrame *frame = new MyFrame( "TDI", wxPoint(50, 50), wxSize(650, 440));
+    MyFrame *frame = new MyFrame( "TDI", wxPoint(0, 0), wxSize(940, 580));
     frame->Show( true );
     
     return true;
@@ -84,7 +84,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     SetMenuBar( menuBar );
     CreateStatusBar();
     SetStatusText( "TDI sorts your To Do Items !" );
-    
+    //
     
     //[create button]
 
@@ -94,12 +94,20 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
     // wxPanel * panel1 = new wxPanel(panel, ID_BasicPanel, wxPoint(100,100),wxSize(50,50));
 
-    wxImage BG1(wxT("C:/workspace/project0/pic/wood_base.jpg"), wxBITMAP_TYPE_JPEG);
-    wxBitmap BG(BG1);
-    wxBitmapBGPanel* panel = new wxBitmapBGPanel(this,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+    wxImage BG(wxT("C:/workspace/project0/pic/BackGround.png"), wxBITMAP_TYPE_PNG);
 
-    wxBitmapBGPanel* panel1 = new wxBitmapBGPanel(panel,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+    wxImage rack_h(wxT("C:/workspace/project0/pic/rack_fit.png"), wxBITMAP_TYPE_PNG);
+
+    wxImage rack_l(wxT("C:/workspace/project0/pic/rack_fit.png"), wxBITMAP_TYPE_PNG);
+
     
+    wxBitmapBGPanel* panel_BG = new wxBitmapBGPanel(this,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+
+    wxPanel* panel_new = new wxPanel(panel_BG,ID_BasicPanel, wxPoint(765,348.5),wxSize(108,106),wxNO_BORDER,"123");
+
+    wxBitmapBGPanel* panel_rack_h = new wxBitmapBGPanel(panel_BG,rack_h,ID_BasicPanel, wxPoint(57,45),wxSize(789,65),wxNO_BORDER,"123");
+    
+    wxPanel* panel_ball1 = new wxPanel(panel_rack_h,ID_BasicPanel, wxPoint(300,5),wxSize(60,59),wxNO_BORDER,"123");
     //wxTransparentPanel * panel1 = new wxTransparentPanel(panel, ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"456");
     
     
@@ -112,13 +120,20 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     // wxPanel * panel1 = new wxPanel(panel, wxID_ANY, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"456");
     // panel1->SetBackgroundColour(wxTRANSPARENT);
 
-    wxImage ImageBall1(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
-    wxImage ImageBall1_p(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
-    ImageBall1.Rescale(50,50);
-    ImageBall1_p.Rescale(45,45);
-    wxBitmap ball1(ImageBall1);
-    wxBitmap ball1_p(ImageBall1_p);
-    wxBitmappedButton* SD_Button_b1 = new wxBitmappedButton(panel1,ID_Button,ball1,ball1_p,wxPoint(0,0));
+    wxImage new_button(wxT("C:/workspace/project0/pic/n_fit.png"), wxBITMAP_TYPE_PNG);
+    //wxImage ImageBall1_p(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
+    
+
+    wxImage ImageBall1(wxT("C:/workspace/project0/pic/ball1_fit.png"), wxBITMAP_TYPE_PNG);
+    //wxImage ImageBall1_p(wxT("C:/workspace/project0/pic/ball1.png"), wxBITMAP_TYPE_PNG);
+    
+    
+    
+    //wxBitmap button1(ImageBall1);
+    
+    wxBitmappedButton* button_new = new wxBitmappedButton(panel_new,ID_Button,new_button,new_button,wxPoint(0,0));
+
+    wxBitmappedButton* item_b1 = new wxBitmappedButton(panel_ball1,ID_Button,ImageBall1,ImageBall1,wxPoint(0,0));
     //SD_Button_b1->SetBackgroundColour(wxTRANSPARENT);
     //SD_Button_b1->SetBackgroundStyle(wxBG_STYLE_TRANSPARENT);
     //SD_Button_b1->SetSize(50,50);
