@@ -4,23 +4,29 @@
 
 class wxBitmappedButton : public wxButton
 {
-	wxBitmap m_Normal;
-	wxBitmap m_Pushed;
+	wxBitmap pic_one;
+	wxBitmap pic_two;
+	wxBitmap pic_three;
 	wxCoord pos_x;
 	wxCoord pos_y;
-	unsigned int nor_width;
-	unsigned int nor_height;
-	unsigned int push_width;
-	unsigned int push_height;
-	bool m_IsPushed;
+	
+	
 public:
-	wxBitmappedButton(wxWindow * parent, wxWindowID id, 
+	wxBitmappedButton(wxWindow * parent, wxWindowID id, int typeN,
 		wxBitmap normal, wxBitmap pushed, wxPoint pos);
 
+	wxBitmappedButton(wxWindow * parent, wxWindowID id, int typeN,
+		wxBitmap pic_one, wxBitmap pic_two,wxBitmap pic_three, wxPoint pos);
 	DECLARE_EVENT_TABLE()
 
 	void OnMouseDown(wxMouseEvent & event);
 	void OnMouseUp(wxMouseEvent & event);
 	void OnPaint(wxPaintEvent & event);
 	void OnDoubleClick(wxMouseEvent & event);
+	void Motion(wxMouseEvent & event);
+
+protected :
+	int clicked_flag;
+	bool motion_flag;
+	int type;
 };
