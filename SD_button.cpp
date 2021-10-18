@@ -1,6 +1,7 @@
 #include "SD_button.h"
 
 
+
 BEGIN_EVENT_TABLE(wxBitmappedButton, wxButton)
 EVT_LEFT_DOWN(wxBitmappedButton::OnMouseDown)
 EVT_LEFT_UP(wxBitmappedButton::OnMouseUp)
@@ -47,6 +48,7 @@ void wxBitmappedButton::OnMouseDown(wxMouseEvent & event)
 			break;
 		case 1:
 			clicked_flag = 1;
+			
 			Refresh();
 			break;
 		case 2 : 
@@ -122,3 +124,5 @@ void wxBitmappedButton::Motion(wxMouseEvent & event)
 	if(event.Leaving())
 		motion_flag = false;
 }	
+
+

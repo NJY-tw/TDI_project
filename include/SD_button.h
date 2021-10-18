@@ -1,6 +1,9 @@
 #include <base.h>
 #include <wx/button.h>
 #include <wx/bitmap.h>
+#include "SD_panel.h"
+
+
 
 class wxBitmappedButton : public wxButton
 {
@@ -30,3 +33,8 @@ protected :
 	bool motion_flag;
 	int type;
 };
+
+
+
+
+

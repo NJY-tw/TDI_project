@@ -19,32 +19,33 @@ public:
     virtual bool OnInit();
 };
 
-class MyFrame: public wxFrame
-{
-public:
-    MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+// class MyFrame: public wxFrame
+// {
+// public:
+//     MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
     
 
-private:
-    //Set the event corresponding behavior
-    wxBitmap SD_Background;
-
-    void OnHello(wxCommandEvent& event);
-    void OnExit(wxCommandEvent& event);
-    void OnAbout(wxCommandEvent& event);
-    void OnButton(wxCommandEvent& event);
+// private:
+//     //Set the event corresponding behavior
+//     int ball_count;
+//     wxBitmapBGPanel* panel_rack_h;
+//     void OnHello(wxCommandEvent& event);
+//     void OnExit(wxCommandEvent& event);
+//     void OnAbout(wxCommandEvent& event);
+//     void OnButton(wxCommandEvent& event);
+//     void BallCreate();
     
-    wxDECLARE_EVENT_TABLE();
-};
+//     wxDECLARE_EVENT_TABLE();
+// };
 enum
 {
-    ID_Hello = 1,
-    ID_Button_Ball10 = 2,
-    ID_Button_Save = 3,
-    ID_Button_New = 4,
-    ID_Button_Mode = 7,
-    ID_BasicPanel = 5,
-    ID_PanelBall_10 = 6
+    ID_Hello = 10,
+    ID_Button_Ball10,
+    ID_Button_Save,
+    ID_Button_New,
+    ID_Button_Mode,
+    ID_BasicPanel,
+    ID_PanelBall_10
 
 };
 
@@ -72,7 +73,7 @@ bool MyApp::OnInit()
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
         : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
-
+    ball_count=0;
     //[default frame]
     wxMenu *menuFile = new wxMenu;
     menuFile->Append(ID_Hello, "&Author\tCtrl-H",
@@ -110,7 +111,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
     wxBitmapBGPanel* panel_rack_l = new wxBitmapBGPanel(panel_BG,rack,wxID_ANY, wxPoint(57,129.6),wxSize(789,65),wxNO_BORDER,"123");
     
-    wxPanel* panel_ball10 = new wxPanel(panel_rack_h,ID_PanelBall_10, wxPoint(300,5),wxSize(59,58),wxNO_BORDER,"123");
+    //wxPanel* panel_ball10 = new wxPanel(panel_rack_h,ID_PanelBall_10, wxPoint(300,5),wxSize(59,58),wxNO_BORDER,"123");
     
 
     wxImage new_button(wxT("C:/workspace/project0/pic/n_fit.png"), wxBITMAP_TYPE_PNG);
@@ -123,6 +124,9 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     wxImage save_button(wxT("C:/workspace/project0/pic/s_fit.png"), wxBITMAP_TYPE_PNG);
     wxImage save_button_c(wxT("C:/workspace/project0/pic/s_fit_click.png"), wxBITMAP_TYPE_PNG);  
 
+    wxImage ImageBall9(wxT("C:/workspace/project0/pic/ball9_fit.png"), wxBITMAP_TYPE_PNG);
+    wxImage ImageBall9_c(wxT("C:/workspace/project0/pic/ball9_fit_click.png"), wxBITMAP_TYPE_PNG);
+
     wxImage ImageBall10(wxT("C:/workspace/project0/pic/ball10_fit.png"), wxBITMAP_TYPE_PNG);
     wxImage ImageBall10_c(wxT("C:/workspace/project0/pic/ball10_fit_click.png"), wxBITMAP_TYPE_PNG);
  
@@ -133,7 +137,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
     wxBitmappedButton* button_mode = new wxBitmappedButton(panel_mode,ID_Button_Mode,2,mode_button_0,mode_button_1,mode_button_2,wxPoint(0,0));
 
-    wxBitmappedButton* item_b1 = new wxBitmappedButton(panel_ball10,ID_Button_Ball10,0,ImageBall10,ImageBall10_c,wxPoint(0,0));
+    //wxBitmappedButton* item_b1 = new wxBitmappedButton(panel_ball10,ID_Button_Ball10,0,ImageBall10,ImageBall10_c,wxPoint(0,0));
 
 }
 
@@ -150,5 +154,23 @@ void MyFrame::OnAbout(wxCommandEvent& event)
 void MyFrame::OnHello(wxCommandEvent& event)
 {
     wxLogMessage("A little help from Alexander");
+}
+
+
+void BallCreate(){
+    
+    if(frame->ball_count==0){
+        wxImage Ball10(wxT("C:/workspace/project0/pic/ball10_fit.png"), wxBITMAP_TYPE_PNG);
+        wxImage Ball10_c(wxT("C:/workspace/project0/pic/ball10_fit_click.png"), wxBITMAP_TYPE_PNG);
+        wxPanel* panel_ball10 = new wxPanel(panel_rack_h,wxID_ANY, wxPoint(300,5),wxSize(59,58),wxNO_BORDER,"123");
+        wxBitmappedButton* item_b10 = new wxBitmappedButton(panel_ball10,ID_Button_Ball10,0,Ball10,Ball10_c,wxPoint(0,0));
+    }
+    else{
+        wxImage Ball9(wxT("C:/workspace/project0/pic/ball9_fit.png"), wxBITMAP_TYPE_PNG);
+        wxImage Ball9_c(wxT("C:/workspace/project0/pic/ball9_fit_click.png"), wxBITMAP_TYPE_PNG);
+        wxPanel* panel_ball9 = new wxPanel(panel_rack_h,wxID_ANY, wxPoint(200,5),wxSize(59,58),wxNO_BORDER,"123");
+        wxBitmappedButton* item_b9 = new wxBitmappedButton(panel_ball9,ID_Button_Ball10,0,Ball9,Ball9_c,wxPoint(0,0));
+    }
+    ball_count+=1;
 }
 
