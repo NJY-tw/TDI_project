@@ -2,6 +2,7 @@
 
 
 
+
 BEGIN_EVENT_TABLE(wxBitmappedButton, wxButton)
 EVT_LEFT_DOWN(wxBitmappedButton::OnMouseDown)
 EVT_LEFT_UP(wxBitmappedButton::OnMouseUp)
@@ -11,27 +12,32 @@ EVT_LEAVE_WINDOW(wxBitmappedButton::Motion)
 EVT_PAINT(wxBitmappedButton::OnPaint)
 END_EVENT_TABLE()
 
-wxBitmappedButton::wxBitmappedButton(wxWindow * parent, wxWindowID id, int typeN,
-									 wxBitmap normal, wxBitmap pushed, wxPoint pos)
+
+
+wxBitmappedButton::wxBitmappedButton(wxWindow * parent, wxWindowID id, BUTTON_TYPE typeN,
+									 wxBitmap normal, wxBitmap pushed, wxPoint pos, wxBitmapBGPanel* panels)
 									 : wxButton(parent, id, wxEmptyString, pos),
 									 clicked_flag(0),
 									 motion_flag(false),
 									 type(typeN),
-									 pic_one(normal), pic_two(pushed)
+									 pic_one(normal), pic_two(pushed),
+									 cling_panels(panels),
+									 ball_count(0)
 {
-
+	
 	SetSize(pic_one.GetWidth(), pic_one.GetHeight());
 	pos_x = pos.x;
 	pos_y = pos.y;
 }
 
-wxBitmappedButton::wxBitmappedButton(wxWindow * parent, wxWindowID id, int typeN,
+wxBitmappedButton::wxBitmappedButton(wxWindow * parent, wxWindowID id, BUTTON_TYPE typeN,
 									 wxBitmap pic_oneN, wxBitmap pic_twoN,wxBitmap pic_threeN, wxPoint pos)
 									 : wxButton(parent, id, wxEmptyString, pos),
 									 clicked_flag(0),
 									 motion_flag(false),
 									 type(typeN),
 									 pic_one(pic_oneN), pic_two(pic_twoN), pic_three(pic_threeN)
+									 
 {
 	SetSize(pic_one.GetWidth(), pic_one.GetHeight());
 	pos_x = pos.x;
@@ -40,18 +46,19 @@ wxBitmappedButton::wxBitmappedButton(wxWindow * parent, wxWindowID id, int typeN
 
 void wxBitmappedButton::OnMouseDown(wxMouseEvent & event)
 {
+	
 	switch (type)
 	{
-		case 0:
+		case TYPE_BALL:
 			clicked_flag = (clicked_flag==1)?0:1;
 			Refresh();
 			break;
-		case 1:
+		case TYPE_NEW:
 			clicked_flag = 1;
-			
+			BallCreate(ball_count);
 			Refresh();
 			break;
-		case 2 : 
+		case TYPE_SORT: 
 			if(clicked_flag==0)
 				clicked_flag = 1;
 			else if(clicked_flag==1)
@@ -63,6 +70,15 @@ void wxBitmappedButton::OnMouseDown(wxMouseEvent & event)
 			break;
 	}
 	
+	
+}
+
+void wxBitmappedButton::BallCreate(int ballNum){
+
+		wxImage Ball10(wxT("C:/workspace/project0/pic/ball10_fit.png"), wxBITMAP_TYPE_PNG);
+        wxImage Ball10_c(wxT("C:/workspace/project0/pic/ball10_fit_click.png"), wxBITMAP_TYPE_PNG);
+        wxPanel* panel_ball10 = new wxPanel(cling_panels,wxID_ANY, wxPoint(300,5),wxSize(59,58),wxNO_BORDER,"123");
+        wxBitmappedButton* item_b10 = new wxBitmappedButton(panel_ball10,wxID_ANY,TYPE_BALL,Ball10,Ball10_c,wxPoint(0,0),nullptr);
 }
 
 void wxBitmappedButton::OnMouseUp(wxMouseEvent & event)

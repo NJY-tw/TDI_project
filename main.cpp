@@ -9,7 +9,7 @@
 /*self define header*/
 #include <SD_button.h>
 #include <SD_colour.h>
-#include <SD_panel.h>
+// #include <SD_panel.h>
 
 //#include <wx/wxShapedWindow.h>
 
@@ -19,24 +19,22 @@ public:
     virtual bool OnInit();
 };
 
-// class MyFrame: public wxFrame
-// {
-// public:
-//     MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+class MyFrame: public wxFrame
+{
+public:
+    MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
     
 
-// private:
-//     //Set the event corresponding behavior
-//     int ball_count;
-//     wxBitmapBGPanel* panel_rack_h;
-//     void OnHello(wxCommandEvent& event);
-//     void OnExit(wxCommandEvent& event);
-//     void OnAbout(wxCommandEvent& event);
-//     void OnButton(wxCommandEvent& event);
-//     void BallCreate();
+private:
+    //Set the event corresponding behavior
+    void OnHello(wxCommandEvent& event);
+    void OnExit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+    void OnButton(wxCommandEvent& event);
+    void BallCreate();
     
-//     wxDECLARE_EVENT_TABLE();
-// };
+    wxDECLARE_EVENT_TABLE();
+};
 enum
 {
     ID_Hello = 10,
@@ -73,7 +71,7 @@ bool MyApp::OnInit()
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
         : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
-    ball_count=0;
+    
     //[default frame]
     wxMenu *menuFile = new wxMenu;
     menuFile->Append(ID_Hello, "&Author\tCtrl-H",
@@ -131,11 +129,12 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     wxImage ImageBall10_c(wxT("C:/workspace/project0/pic/ball10_fit_click.png"), wxBITMAP_TYPE_PNG);
  
     
-    wxBitmappedButton* button_new = new wxBitmappedButton(panel_new,ID_Button_New,1,new_button,new_button_c,wxPoint(0,0));
+    wxBitmappedButton* button_new = new wxBitmappedButton(panel_new,ID_Button_New,TYPE_NEW,new_button,new_button_c,wxPoint(0,0),panel_rack_h);
+    
 
-    wxBitmappedButton* button_save = new wxBitmappedButton(panel_save,ID_Button_Save,1,save_button,save_button_c,wxPoint(0,0));
+    wxBitmappedButton* button_save = new wxBitmappedButton(panel_save,ID_Button_Save,TYPE_NEW,save_button,save_button_c,wxPoint(0,0),panel_rack_h);
 
-    wxBitmappedButton* button_mode = new wxBitmappedButton(panel_mode,ID_Button_Mode,2,mode_button_0,mode_button_1,mode_button_2,wxPoint(0,0));
+    wxBitmappedButton* button_mode = new wxBitmappedButton(panel_mode,ID_Button_Mode,TYPE_SORT,mode_button_0,mode_button_1,mode_button_2,wxPoint(0,0));
 
     //wxBitmappedButton* item_b1 = new wxBitmappedButton(panel_ball10,ID_Button_Ball10,0,ImageBall10,ImageBall10_c,wxPoint(0,0));
 
@@ -157,20 +156,4 @@ void MyFrame::OnHello(wxCommandEvent& event)
 }
 
 
-void BallCreate(){
-    
-    if(frame->ball_count==0){
-        wxImage Ball10(wxT("C:/workspace/project0/pic/ball10_fit.png"), wxBITMAP_TYPE_PNG);
-        wxImage Ball10_c(wxT("C:/workspace/project0/pic/ball10_fit_click.png"), wxBITMAP_TYPE_PNG);
-        wxPanel* panel_ball10 = new wxPanel(panel_rack_h,wxID_ANY, wxPoint(300,5),wxSize(59,58),wxNO_BORDER,"123");
-        wxBitmappedButton* item_b10 = new wxBitmappedButton(panel_ball10,ID_Button_Ball10,0,Ball10,Ball10_c,wxPoint(0,0));
-    }
-    else{
-        wxImage Ball9(wxT("C:/workspace/project0/pic/ball9_fit.png"), wxBITMAP_TYPE_PNG);
-        wxImage Ball9_c(wxT("C:/workspace/project0/pic/ball9_fit_click.png"), wxBITMAP_TYPE_PNG);
-        wxPanel* panel_ball9 = new wxPanel(panel_rack_h,wxID_ANY, wxPoint(200,5),wxSize(59,58),wxNO_BORDER,"123");
-        wxBitmappedButton* item_b9 = new wxBitmappedButton(panel_ball9,ID_Button_Ball10,0,Ball9,Ball9_c,wxPoint(0,0));
-    }
-    ball_count+=1;
-}
 

@@ -15,7 +15,7 @@ public:
             long style,
             const wxString& name);
 
-	DECLARE_EVENT_TABLE()
+	DECLARE_EVENT_TABLE();
 
 
 	void OnPaint(wxPaintEvent & event);
