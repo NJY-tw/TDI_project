@@ -11,6 +11,15 @@
 #include <SD_colour.h>
 // #include <SD_panel.h>
 
+enum 
+{
+    ID_Hello=0,
+    ID_BUTTON_NEW,
+    ID_BUTTON_SAVE,
+    ID_BUTTON_MODE,
+    ID_BASIC,
+};
+
 //#include <wx/wxShapedWindow.h>
 
 class MyApp: public wxApp
@@ -35,17 +44,8 @@ private:
     
     wxDECLARE_EVENT_TABLE();
 };
-enum
-{
-    ID_Hello = 10,
-    ID_Button_Ball10,
-    ID_Button_Save,
-    ID_Button_New,
-    ID_Button_Mode,
-    ID_BasicPanel,
-    ID_PanelBall_10
 
-};
+
 
 //bind the ID number with the behavior
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
@@ -96,24 +96,30 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     wxImage rack(wxT("C:/workspace/project0/pic/rack_fit.png"), wxBITMAP_TYPE_PNG);
 
 
+    wxBitmapBGPanel* panel_racks[2];
     //buttons
-    wxBitmapBGPanel* panel_BG = new wxBitmapBGPanel(this,BG,ID_BasicPanel, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
+    wxBitmapBGPanel* panel_BG = new wxBitmapBGPanel(this,BG,ID_BASIC, wxPoint(100,100),wxSize(50,50),wxNO_BORDER,"123");
 
-    wxPanel* panel_new = new wxPanel(panel_BG,ID_BasicPanel, wxPoint(765,350.5),wxSize(98,97),wxNO_BORDER,"123");
+    wxPanel* panel_new = new wxPanel(panel_BG,ID_BASIC, wxPoint(765,350.5),wxSize(98,97));
 
-    wxPanel* panel_save = new wxPanel(panel_BG,ID_BasicPanel, wxPoint(765,225.4),wxSize(97,96),wxNO_BORDER,"123");
+    wxPanel* panel_save = new wxPanel(panel_BG,ID_BASIC, wxPoint(765,225.4),wxSize(97,96),wxNO_BORDER,"123");
 
-    wxPanel* panel_mode = new wxPanel(panel_BG,ID_BasicPanel, wxPoint(708.6,228.2),wxSize(38,87),wxNO_BORDER,"123");
+    wxPanel* panel_mode = new wxPanel(panel_BG,ID_BASIC, wxPoint(708.6,228.2),wxSize(38,87),wxNO_BORDER,"123");
 
-    wxBitmapBGPanel* panel_rack_h = new wxBitmapBGPanel(panel_BG,rack,wxID_ANY, wxPoint(57,45),wxSize(789,65),wxNO_BORDER,"123");
+    wxBitmapBGPanel* panel_rack_h = new wxBitmapBGPanel(panel_BG,rack,ID_BASIC, wxPoint(57,45),wxSize(789,65),wxNO_BORDER,"123");
 
-    wxBitmapBGPanel* panel_rack_l = new wxBitmapBGPanel(panel_BG,rack,wxID_ANY, wxPoint(57,129.6),wxSize(789,65),wxNO_BORDER,"123");
+    wxBitmapBGPanel* panel_rack_l = new wxBitmapBGPanel(panel_BG,rack,ID_BASIC, wxPoint(57,129.6),wxSize(789,65),wxNO_BORDER,"123");
+
+    panel_racks[0] = panel_rack_h;
+    panel_racks[1] = panel_rack_l;
     
     //wxPanel* panel_ball10 = new wxPanel(panel_rack_h,ID_PanelBall_10, wxPoint(300,5),wxSize(59,58),wxNO_BORDER,"123");
     
 
     wxImage new_button(wxT("C:/workspace/project0/pic/n_fit.png"), wxBITMAP_TYPE_PNG);
     wxImage new_button_c(wxT("C:/workspace/project0/pic/n_fit_click.png"), wxBITMAP_TYPE_PNG);  
+    // wxBitmap new_button_bm(new_button);
+    // wxBitmap new_button_c_bm(new_button_c);
 
     wxImage mode_button_0(wxT("C:/workspace/project0/pic/flip_high_fit.png"), wxBITMAP_TYPE_PNG);
     wxImage mode_button_1(wxT("C:/workspace/project0/pic/flip_middle_fit.png"), wxBITMAP_TYPE_PNG);  
@@ -129,12 +135,11 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     wxImage ImageBall10_c(wxT("C:/workspace/project0/pic/ball10_fit_click.png"), wxBITMAP_TYPE_PNG);
  
     
-    wxBitmappedButton* button_new = new wxBitmappedButton(panel_new,ID_Button_New,TYPE_NEW,new_button,new_button_c,wxPoint(0,0),panel_rack_h);
+    wxBitmappedButton* button_new = new wxBitmappedButton(panel_new,ID_BUTTON_NEW,TYPE_NEW,new_button,new_button_c,wxPoint(0,0),panel_racks,nullptr);
     
+    wxBitmappedButton* button_save = new wxBitmappedButton(panel_save,ID_BUTTON_SAVE,TYPE_NEW,save_button,save_button_c,wxPoint(0,0),panel_racks,nullptr);
 
-    wxBitmappedButton* button_save = new wxBitmappedButton(panel_save,ID_Button_Save,TYPE_NEW,save_button,save_button_c,wxPoint(0,0),panel_rack_h);
-
-    wxBitmappedButton* button_mode = new wxBitmappedButton(panel_mode,ID_Button_Mode,TYPE_SORT,mode_button_0,mode_button_1,mode_button_2,wxPoint(0,0));
+    wxBitmappedButton* button_mode = new wxBitmappedButton(panel_mode,ID_BUTTON_MODE,TYPE_SORT,mode_button_0,mode_button_1,mode_button_2,wxPoint(0,0));
 
     //wxBitmappedButton* item_b1 = new wxBitmappedButton(panel_ball10,ID_Button_Ball10,0,ImageBall10,ImageBall10_c,wxPoint(0,0));
 
